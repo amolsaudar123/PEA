@@ -31,3 +31,12 @@
 
 # "temporary" build files
 /target
+
+# IDE-idea files
+/.slcache
+/.idea/
+/.project
+/.classpath
+/.asscache
+/*.iml
+/out

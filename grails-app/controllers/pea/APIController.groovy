@@ -41,7 +41,7 @@ class APIController {
 
 
         render(status: 200, "${[aggregatedExpenses: aggregatedExpenses, aggregatedExpensesForLastMonth: aggregatedExpensesForLastMonth] as JSON}")
--
+
     }
 
 

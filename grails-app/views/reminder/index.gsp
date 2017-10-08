@@ -20,6 +20,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 </head>
 <body>
 <div class="mainContainer">
@@ -58,76 +60,173 @@
         </div>
     </nav>
     <!--LeftSide Menu End-->
-    <div class="reminderDetail">Reminder</div>
-    <div class="subTitle"><b>Old Reminders:-</b></div>
-    <table class="table-two" border="1" id="reminderTable">
-        <thead>
-        <tr style="height: 40px;">
-            <th class="heading2">Title</th>
-            <th class="heading2">Description</th>
-
-            <th class="heading2">Delete</th>
-           </tr>
-        </thead>
-        <tbody>
-
-        <g:each in="${reminder}" status="i" var="reminders">
-            <tr style="height: 40px;">
-                <td >${reminders.title}</td>
-                <td>${reminders.description}</td>
-
-                <td><g:link action="delete"  controller="reminder" id="${reminders.id}">Delete</g:link></td>
-            </tr>
-        </g:each>
-        </tbody>
-    </table>
-    <script>
+    %{--Current Month Expenses Calculaction--}%
+    <script type="text/javascript">
+        var inlineDataForThisMonth=[['Category', 'Amount']];
         $(document).ready(function() {
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChartThis);
 
-            $("form").hide();
-            $("#show").show();
+            $.ajax({
+                type: 'GET',
+                url: '/PEA/api/expenses',
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    console.log(data.aggregatedExpenses);
+                    var resultThis = data.aggregatedExpenses;
+                    var resultDataThis = [];
+                    var entryThis = [];
+                    entryThis.push('Category');
+                    entryThis.push('Amount');
 
-            $('#show').click(function() {
-                $("form").slideToggle();
+                    resultDataThis.push(entryThis);
+                    var keysThis = Object.keys(resultThis);
+                    console.log(keysThis);
+
+                    keysThis.forEach(function(elementThis) {
+                        console.log(elementThis);
+                        var entryThis = [];
+                        entryThis.push(elementThis);
+                        entryThis.push(resultThis[elementThis]);
+                        resultDataThis.push(entryThis);
+                    });
+
+                    console.log(resultDataThis);
+                    inlineDataForThisMonth = resultDataThis;
+                    drawChartThis();
+                }
+
             });
-
         });
+
+        function drawChartThis() {
+
+            if(google.visualization){
+                var dataThis = google.visualization.arrayToDataTable(inlineDataForThisMonth);
+
+                // Optional; add a title and set the width and height of the chart
+                var optionsThis = {'title':'Current Month Expenses', 'width':600, 'height':500};
+
+                // Display the chart inside the <div> element with id="piechart"
+                var chartThis = new google.visualization.PieChart(document.getElementById('piechart'));
+                chartThis.draw(dataThis, optionsThis);
+            }
+
+        }
+    </script>
+    %{--Current Month Expenses Calculation Closed--}%
+
+    %{--Last Month Expenses Calculation --}%
+
+    <script type="text/javascript">
+        var inlineData=[['Category', 'Amount']];
+        $(document).ready(function() {
+            // Load google charts
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            $.ajax({
+                type: 'GET',
+                url: '/PEA/api/expenses',
+                dataType: "json",
+                success: function(data) {
+                    console.log(data);
+                    console.log(data.aggregatedExpensesForLastMonth);
+                    var result = data.aggregatedExpensesForLastMonth;
+                    var resultData = [];
+                    var entry = [];
+                    entry.push('Category');
+                    entry.push('Amount');
+
+                    resultData.push(entry);
+                    var keys = Object.keys(result);
+                    console.log(keys);
+
+                    keys.forEach(function(element) {
+                        console.log(element);
+                        var entry = [];
+                        entry.push(element);
+                        entry.push(result[element]);
+                        resultData.push(entry);
+                    });
+
+                    console.log(resultData);
+                    inlineData = resultData;
+                    drawChart();
+                }
+
+            });
+        });
+
+        function drawChart() {
+
+            if(google.visualization){
+                var data = google.visualization.arrayToDataTable(inlineData);
+
+                // Optional; add a title and set the width and height of the chart
+                var options = {'title':'Last Month Expenses', 'width':600, 'height':500};
+
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = new google.visualization.PieChart(document.getElementById('piechartForLastMonth'));
+                chart.draw(data, options);
+            }
+
+        }
     </script>
 
-    <div class="newReminder">To Add new reminder click the button:-
-        <button  type="button" id="show" class="btn-md btn-info "> Add Reminder</button>
+%{--Bar Chart--}%
 
-    </div>
+    <script type="text/javascript">
+        //load the Google Visualization API and the chart
+        google.load('visualization', '1', {'packages':['columnchart','piechart']});
 
-    <g:form class="form-horizontal" id="form" role="form" action="save" style="display: none">
-        <h4>Add Reminder</h4>
+        //set callback
+        google.setOnLoadCallback (createChart);
 
-        <label class="col-sm-3 control-label">Title</label>
-        <div class="col-sm-9">
-         <g:textField name="title" value="${title}"  id="title" placeholder="title for reminder.." class="form-control"/>
+        //callback function
+        function createChart() {
 
-            <span class="help-block">MyFirstReminder, NotifyReminder. etc...</span>
-        </div>
+            //create data table object
+            var dataTable = new google.visualization.DataTable();
 
+            //define columns
+            dataTable.addColumn('string','Quarters');
+            dataTable.addColumn('number', 'Current Month');
+            dataTable.addColumn('number', 'Last Month');
 
-        <label class="col-sm-3 control-label">Description</label>
-        <div class="col-sm-9">
-            <g:textArea id="description" class="form-control" value="${description}" name="description"/>
+            var inlineData=[['Entertainment',308,417], ['Shopping',257,300],['Dinner',375,350],['Travelling', 123,100]];
+            //define rows of data
+            dataTable.addRows(inlineData);
 
-            <span class="help-block">description</span>
-        </div>
-        <div>
-            <g:hiddenField name="userName" value="${session.user}"  class="form-control"/>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3">
-
-            <g:submitButton class="btn btn-primary btn-block" value="save" name="save"/>
-        </div>
+            //instantiate our chart objects
+            var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
 
 
-    </g:form>
+            //define options for visualization
+            var options = {width: 1500, height: 330, title: 'Company Earnings'};
 
+            //draw our chart
+            chart.draw(dataTable, options);
+
+
+        }
+    </script>
+
+
+    %{--PieChart Starts--}%
+    <div class="reminderDetail">${new Date()}</div>
+    <div id="piechart"></div>
+
+    <div id="piechartForLastMonth"></div>
+    <div id="barChart"></div>
+
+
+
+
+
+    %{--Footer--}%
     <div id="reminderFooter">
         <div class="container">
             <p class="footer-block"> &copy; 2017 Personal Expense Analyzer

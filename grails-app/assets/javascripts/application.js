@@ -11,10 +11,10 @@
 
 if (typeof jQuery !== 'undefined') {
 	(function($) {
-		$(document).ajaxStart(function(){
-			$('#spinner').fadeIn();
-		}).ajaxStop(function(){
-			$('#spinner').fadeOut();
+		$('#spinner').ajaxStart(function() {
+			$(this).fadeIn();
+		}).ajaxStop(function() {
+			$(this).fadeOut();
 		});
 	})(jQuery);
 }

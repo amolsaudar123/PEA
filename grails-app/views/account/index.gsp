@@ -6,7 +6,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
     <asset:stylesheet src="acc.css"/>
@@ -20,6 +20,92 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        var inlineData=[['Category', 'Amount', 'Amount']];
+        $(document).ready(function() {
+            // Load google charts
+            google.load('visualization', '1', {'packages':['columnchart','piechart']});
+            google.setOnLoadCallback (drawChartThis);
+
+            $.ajax({
+                type: 'GET',
+                url: '/PEA/api/expenses',
+                dataType: "json",
+                success: function(data) {
+
+                    var resultThis = data.aggregatedExpenses;
+                    var result = data.aggregatedExpensesForLastMonth;
+
+                    var resultDataThis = [];
+                    var resultData = [];
+
+                    var entryThis = [];
+                    var entry = [];
+
+                    entryThis.push('Category');
+                    entryThis.push('Amount');
+
+                    entry.push('Category');
+                    entry.push('Amount');
+
+                    resultDataThis.push(entryThis);
+                    resultData.push(entry);
+
+                    var keysThis = Object.keys(resultThis);
+                    var keys = Object.keys(result);
+
+                    keysThis.forEach(function(elementThis) {
+
+                        var entryThis = [];
+                        entryThis.push(elementThis);
+                        entryThis.push(resultThis[elementThis]);
+                        resultDataThis.push(entryThis);
+                        var entry = [];
+                        entry.push(elementThis);
+                        entry.push(result[elementThis]);
+                        resultData.push(entry);
+                    });
+
+
+                    keys.forEach(function(element) {
+
+                        var entry = [];
+                        entry.push(element);
+                        entry.push(result[element]);
+                        resultData.push(entry);
+                    });
+                    var newData=[['Category', 'Amount', 'Amount']];
+                    1
+
+
+                    inlineData = [[resultDataThis],[resultData] ];
+                   console.log("inline",inlineData);
+                    drawChartThis();
+                }
+
+            });
+        });
+        function drawChartThis() {
+
+            if(google.visualization){
+                var dataTable = new google.visualization.DataTable();
+                dataTable.addColumn('string','Quarters');
+                dataTable.addColumn('number', 'Current Month');
+                dataTable.addColumn('number', 'Last Month');
+                // Optional; add a title and set the width and height of the chart
+                var options = {width: 1500, height: 330, title: 'Company Earnings'};
+
+                dataTable.addRows(inlineData);
+                // Display the chart inside the <div> element with id="piechart"
+                var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
+
+                chart.draw(dataTable, options);
+            }
+
+        }
+
+    </script>
 </head>
 <body>
 <div class="mainContainer">
@@ -101,7 +187,7 @@
 
         <label class="col-sm-3 control-label">Account Name</label>
         <div class="col-sm-9">
-             <g:textField name="bankName" value="${bankName}"  id="bankName" placeholder="Account Name" class="form-control" list="account"/>
+             <g:textField name="bankName" value="${bankName}"  id="bankName" placeholder="Account Name" class="form-control" />
             <datalist id="account">
             <option value="Cash">
                 <option value="SBI">
@@ -148,6 +234,8 @@
 
     </g:form>
 </div>
+<div id="chart"></div>
+
 
 <!--[ footer ] -->
 <div id="accountFooter">

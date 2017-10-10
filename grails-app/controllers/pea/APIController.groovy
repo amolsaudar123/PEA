@@ -2,9 +2,18 @@ package pea
 
 import grails.converters.JSON
 
+import java.text.DateFormatSymbols
+
+class MonthlyExpense{
+    String month
+    String category
+    Integer amount
+}
+
 class APIController {
 
     def getAggregatedExpenses() {
+
         response.setContentType('application/json')
 
         Calendar calendar = Calendar.getInstance()
@@ -37,11 +46,73 @@ class APIController {
             aggregatedExpensesForLastMonth.put(tag, sum)
         }
 
+        Calendar lowerDate = Calendar.getInstance()
+        lowerDate.add(Calendar.MONTH,-1)
 
 
 
-        render(status: 200, "${[aggregatedExpenses: aggregatedExpenses, aggregatedExpensesForLastMonth: aggregatedExpensesForLastMonth] as JSON}")
+        def comparativeData=getExpensesFor(lowerDate.getTime().clearTime(),new Date())
 
+
+        render(status: 200, "${[comparativeData:comparativeData, currentMonth:new Date().month, aggregatedExpensesForLastMonth:aggregatedExpensesForLastMonth,aggregatedExpenses:aggregatedExpenses] as JSON}")
+
+    }
+
+
+    def getComparativeExpenses(){
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH)
+        int lastMonth = Calendar.getInstance().get(Calendar.MONTH)
+
+    }
+
+
+    def getCategorizedExpensesForPastMonths(){
+        Calendar lowerDate = Calendar.getInstance()
+        lowerDate.add(Calendar.MONTH,-1)
+        //def comparativeData=getExpensesFor(lowerDate.getTime().clearTime(),new Date())
+
+        List<UserTransaction> transactions = UserTransaction.findAllByUserAndTypeAndDateBetween(session.user, "expense", lowerDate.getTime().clearTime(), new Date(),[sort:"date",order:"asc"])
+        def monthlyTransactions = transactions.groupBy { getMonthForInt(it.date[Calendar.MONTH]) }
+        def categorizedTransactions = transactions.groupBy { it.tag }
+        def categories = categorizedTransactions.keySet()
+
+        List<MonthlyExpense> expenses = new ArrayList<>()
+        monthlyTransactions.keySet().each {month->
+            List<UserTransaction> transactionsOfMonth = monthlyTransactions[month]
+            categories.each {category->
+                Integer spentOnCategory = transactionsOfMonth.findAll{it.tag==category}.sum {t->t.amount}
+                MonthlyExpense expense = new MonthlyExpense(month: month,amount:spentOnCategory?spentOnCategory:0,category: category )
+                expenses.add(expense)
+            }
+
+        }
+        println expenses
+
+        render(status: 200, "${[comparativeData:expenses,categories:categories, currentMonth:new Date().month] as JSON}")
+
+    }
+
+    private def getExpensesFor(Date lowerDate,Date upperDate){
+        List<UserTransaction> transactions = UserTransaction.findAllByUserAndTypeAndDateBetween(session.user, "expense", lowerDate, upperDate)
+
+
+        Map groupedTransactions = transactions.groupBy ({it.tag},{it.date.getMonth()})
+        Map<String, List<MonthlyExpense>> aggregatedExpenses = new HashMap<>()
+        groupedTransactions.keySet().each { tagThis ->
+
+            Map value = groupedTransactions[tagThis]
+            value.keySet().each {tagMonth->
+                List<UserTransaction> valuesForTagThis = value[tagMonth]
+                Integer sumThis = valuesForTagThis.sum { transactionThis -> transactionThis.amount }
+
+                if(!aggregatedExpenses.containsKey(tagThis)){
+                    aggregatedExpenses.put(tagThis,new ArrayList<MonthlyExpense>())
+                }
+                MonthlyExpense expense = new MonthlyExpense(month: tagMonth,amount:sumThis?sumThis:0,category: tagThis )
+                aggregatedExpenses.get(tagThis).add(expense)
+            }
+        }
+        aggregatedExpenses
     }
 
 
@@ -58,5 +129,15 @@ class APIController {
     private void logException(final Exception exception) {
         log.error "Exception occurred. ${exception?.message}", exception
         exception.printStackTrace()
+    }
+
+    private String getMonthForInt(int num) {
+        String month = "wrong"
+        DateFormatSymbols dfs = new DateFormatSymbols()
+        String[] months = dfs.getMonths();
+        if (num >= 0 && num <= 11 ) {
+            month = months[num]
+        }
+        return month
     }
 }

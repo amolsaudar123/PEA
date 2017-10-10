@@ -67,4 +67,5 @@ class ExpenseController {
         updateTransaction.save flush: true, failOnError: true
         redirect action: "index1", controller: "expense"
     }
+
 }

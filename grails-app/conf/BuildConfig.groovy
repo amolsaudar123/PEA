@@ -51,20 +51,22 @@ grails.project.dependency.resolution = {
          runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
+
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.70" // or ":tomcat:8.0.22"
+        build ":tomcat:7.0.55"
 
         // plugins for the compile step
+
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
-        // asset-pipeline 2.0+ requires Java 7, use version 1.9.x with Java 6
-        compile ":asset-pipeline:2.5.7"
+        compile ":asset-pipeline:1.9.9"
+        compile ":mail:1.0.7"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"
+        runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
@@ -73,7 +75,5 @@ grails.project.dependency.resolution = {
         //compile ":less-asset-pipeline:1.10.0"
         //compile ":coffee-asset-pipeline:1.8.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"
-
-        //compile ':grails-google-visualization:2.2.1'
     }
 }

@@ -55,7 +55,7 @@
                     <li class="active" style="height: 70px; font-size: 18px"><g:link controller="dashboard" action="onLogin" > Dashboard<span style="font-size:19px;"  class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link controller="account" action="index" >Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link controller="expense" action="index1" >Expense<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link> </li>
-                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder" >Reminder<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder" >Analytics<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
 
                 </ul>

@@ -29,6 +29,7 @@
 		<br>
 
 		<button class="loginBtn loginBtn--google g-signin2" data-onsuccess="onSignIn" id="gmailButton">
+
 			Login with Google
 		</button>
 

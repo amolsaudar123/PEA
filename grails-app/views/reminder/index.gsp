@@ -11,6 +11,8 @@
 <head>
     <title>PEA:Reminder</title>
     <asset:stylesheet src="reminder.css"/>
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>s
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'mainPage.css')}" type="text/css">
 
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'verticalMenu.css')}" type="text/css">
@@ -21,7 +23,70 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+    <script type="text/javascript">
+        var inlineData=[];
+        $(document).ready(function() {
+
+            google.charts.load('current', {
+                'packages': ['bar']
+            });
+
+            google.charts.setOnLoadCallback(drawChartThis);
+
+            $.ajax({
+                type: 'GET',
+                url: '/PEA/api/catexpenses',
+                dataType: "json",
+                success: function (data) {
+                    var resultDataThis = [];
+                    var resultThis = data.comparativeData;
+                    console.log(resultThis);
+                    var headerRow =['Month'];
+                    data.categories.forEach(function (category) {headerRow.push(category) ;});
+                    console.log(headerRow);
+                    var obj = {};
+                    resultThis.forEach(function (expense) {
+                        if(!obj.hasOwnProperty(expense["month"])){
+                            obj[expense["month"]] = [expense["month"]];
+                        }
+                        obj[expense["month"]].push(expense["amount"]);
+
+                    });
+                    console.log(obj);
+                    resultDataThis.push(headerRow);
+
+                    Object.keys(obj).forEach(function (key) {
+                        resultDataThis.push(obj[key]);
+                    });
+                    inlineData = resultDataThis;
+
+                    console.log("inline", inlineData);
+                    drawChartThis();
+                }
+
+            });
+        });
+        function drawChartThis() {
+            if(inlineData){
+                if(google.visualization){
+                    var data = google.visualization.arrayToDataTable(inlineData);
+
+                    var options = {
+                        chart: {
+                            title: 'Categorized Expenses over time',
+                            subtitle: 'Expenses, and Categories',
+                        }
+                    };
+
+                    var chart = new google.charts.Bar(document.getElementById('BarChart'));
+
+                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                }
+            }
+        }
+
+    </script>
 </head>
 <body>
 <div class="mainContainer">
@@ -52,7 +117,7 @@
                     <li style="height: 70px; font-size: 18px"><g:link action="onLogin" controller="dashboard"> Dashboard<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index" controller="account">Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index1" controller="expense"> Expense<span style="font-size:19px; " class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link></li>
-                    <li  class="active" style="height: 70px; font-size: 18px; "><g:link controller="reminder" action="index">Reminder<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li  class="active" style="height: 70px; font-size: 18px; "><g:link controller="reminder" action="index">Analytix<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px; " class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
 
                 </ul>
@@ -132,8 +197,7 @@
                 url: '/PEA/api/expenses',
                 dataType: "json",
                 success: function(data) {
-                    console.log(data);
-                    console.log(data.aggregatedExpensesForLastMonth);
+
                     var result = data.aggregatedExpensesForLastMonth;
                     var resultData = [];
                     var entry = [];
@@ -142,7 +206,7 @@
 
                     resultData.push(entry);
                     var keys = Object.keys(result);
-                    console.log(keys);
+
 
                     keys.forEach(function(element) {
                         console.log(element);
@@ -152,7 +216,7 @@
                         resultData.push(entry);
                     });
 
-                    console.log(resultData);
+                    console.log("resultData",resultData);
                     inlineData = resultData;
                     drawChart();
                 }
@@ -178,52 +242,34 @@
 
 %{--Bar Chart--}%
 
-    <script type="text/javascript">
-        //load the Google Visualization API and the chart
-        google.load('visualization', '1', {'packages':['columnchart','piechart']});
-
-        //set callback
-        google.setOnLoadCallback (createChart);
-
-        //callback function
-        function createChart() {
-
-            //create data table object
-            var dataTable = new google.visualization.DataTable();
-
-            //define columns
-            dataTable.addColumn('string','Quarters');
-            dataTable.addColumn('number', 'Current Month');
-            dataTable.addColumn('number', 'Last Month');
-
-            var inlineData=[['Entertainment',308,417], ['Shopping',257,300],['Dinner',375,350],['Travelling', 123,100]];
-            //define rows of data
-            dataTable.addRows(inlineData);
-
-            //instantiate our chart objects
-            var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
 
 
-            //define options for visualization
-            var options = {width: 1500, height: 330, title: 'Company Earnings'};
-
-            //draw our chart
-            chart.draw(dataTable, options);
-
-
-        }
-    </script>
-
-
-    %{--PieChart Starts--}%
-    <div class="reminderDetail">${new Date()}</div>
+     <div class="reminderDetail">${new Date()}</div>
+    <div class="pdf">
     <div id="piechart"></div>
 
     <div id="piechartForLastMonth"></div>
-    <div id="barChart"></div>
+        <div id="BarChart" style="margin-left: 200px; width: 800px; height: 500px;"></div>
 
+    </div>
 
+    <button id="cmd">Generate PDF</button>
+<script>
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+    return true;
+    }
+    };
 
+    $('#cmd').click(function () {
+    doc.fromHTML($('.pdf').html(), 15, 15, {
+    'width': 170,
+    'elementHandlers': specialElementHandlers
+    });
+    doc.save('sample-file.pdf');
+    });
+</script>
 
 
     %{--Footer--}%

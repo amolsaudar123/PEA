@@ -1,7 +1,9 @@
 package pea
 
-class ReminderController {
+//import grails.plugin.mail.MailService
 
+class ReminderController {
+//    MailService mailService
     def index() {
         def reminder=Reminder.findAllByUserName(session.user).collect{it}
         [reminder: reminder]
@@ -20,4 +22,6 @@ class ReminderController {
         deleteReminder.delete flush: true, failOnError: true
         redirect action: "index", controller: "reminder"
     }
+
+
 }

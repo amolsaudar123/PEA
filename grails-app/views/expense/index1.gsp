@@ -52,7 +52,7 @@
                     <li style="height: 70px; font-size: 18px"><g:link action="onLogin" controller="dashboard"> Dashboard<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index" controller="account" >Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li class="active" style="height: 70px; font-size: 18px"><g:link action="index1" controller="expense">Expense<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link></li>
-                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Reminder<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Analytics<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
 
                 </ul>
@@ -62,7 +62,7 @@
     <!--LeftSide Menu End-->
 
     <div class="expense">Previous Expenses</div>
-
+    <div class="analyzeExpense"><button  type="button" id="" class="btn-md btn-info "> Analyze Expenses</button></div>
     <table class="table-five" border="2">
         <thead>
         <tr>

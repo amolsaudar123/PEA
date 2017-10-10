@@ -25,69 +25,6 @@
 </head>
 <body>
 
-<script type="text/javascript">
-var inlineData=[
-    ['Category', 'Amount'],
-    ['Entertainment', 800],
-    ['Shopping', 2000],
-    ['Food', 2500],
-    ['Health', 350],
-    ['Travel', 2000],
-    ['EMI', 1700]
-];
-    $(document).ready(function() {
-        // Load google charts
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        $.ajax({
-            type: 'GET',
-            url: '/PEA/api/expenses',
-            dataType: "json",
-//            async:false,
-            success: function(data) {
-                console.log(data);
-                var result = data.aggregatedExpenses;
-                var resultData = [];
-                resultData.push(['Category','Amount']);
-                var keys = Object.keys(data.aggregatedExpenses);
-                console.log(keys);
-
-                keys.forEach(function(element) {
-                    console.log(element);
-                    resultData.push([element,aggregatedExpenses[element]]);
-                });
-
-                console.log(resultData);
-                inlineData = resultData;
-                drawChart();
-
-            }
-
-        });
-    });
-
-    function drawChart() {
-
-if(google.visualization){
-    var data = google.visualization.arrayToDataTable(inlineData);
-
-    // Optional; add a title and set the width and height of the chart
-    var options = {'title':'Categorywise Expenses', 'width':400, 'height':300};
-
-    // Display the chart inside the <div> element with id="piechart"
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    chart.draw(data, options);
-}
-
-    }
-
-$(document).ready(function() {
-    var msg = new SpeechSynthesisUtterance('Hello World');
-    window.speechSynthesis.speak(msg);
-});
-
-</script>
 <div class="mainContainer">
     <div class="topHeader">
         <div class="logoHeader">
@@ -117,7 +54,7 @@ $(document).ready(function() {
                     <li style="height: 70px; font-size: 18px"><g:link action="onLogin" controller="dashboard">Dashboard<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link> </li>
                     <li class="active" style="height: 70px; font-size: 18px"><g:link action="index" controller="account">Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index1" controller="expense">Expense<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link> </li>
-                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Reminder<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Analytics<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
 
                 </ul>

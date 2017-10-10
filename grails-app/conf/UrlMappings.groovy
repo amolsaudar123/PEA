@@ -5,8 +5,8 @@ class UrlMappings {
             constraints {
                 // apply constraints here
             }
-
         }
+
         "/"(view: "/index")
         "500"(view: '/error')
         "/api/loginsuccess"(controller: "login", action: "loginSuccess")
@@ -14,8 +14,11 @@ class UrlMappings {
         "/api/onLogin"(controller: "dashboard", action: "onLogin")
 
         "/api/index"(controller: "account", action: "index")
-        "/api/expenses"(controller: "API", action: "getAggregatedExpenses")
-
         "/api/index1"(controller: "expense", action: "index1")
+        "/api/expenses"(controller: "API", action: "getAggregatedExpenses" )
+        "/api/catexpenses"(controller: "API", action: "getCategorizedExpensesForPastMonths" )
+//        "/api/expenses"(controller: "API", action: "getLastAggregatedExpenses")
+
+
     }
 }

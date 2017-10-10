@@ -20,92 +20,71 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        var inlineData=[['Category', 'Amount', 'Amount']];
-        $(document).ready(function() {
-            // Load google charts
-            google.load('visualization', '1', {'packages':['columnchart','piechart']});
-            google.setOnLoadCallback (drawChartThis);
 
-            $.ajax({
-                type: 'GET',
-                url: '/PEA/api/expenses',
-                dataType: "json",
-                success: function(data) {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    %{--<script type="text/javascript">--}%
+        %{--var inlineData=[];--}%
+        %{--$(document).ready(function() {--}%
+           %{----}%
+            %{--google.charts.load('current', {--}%
+                %{--'packages': ['bar']--}%
+            %{--});--}%
 
-                    var resultThis = data.aggregatedExpenses;
-                    var result = data.aggregatedExpensesForLastMonth;
+            %{--google.charts.setOnLoadCallback(drawChartThis);--}%
 
-                    var resultDataThis = [];
-                    var resultData = [];
+            %{--$.ajax({--}%
+                %{--type: 'GET',--}%
+                %{--url: '/PEA/api/catexpenses',--}%
+                %{--dataType: "json",--}%
+                %{--success: function (data) {--}%
+                    %{--var resultDataThis = [];--}%
+                    %{--var resultThis = data.comparativeData;--}%
+                    %{--console.log(resultThis);--}%
+                    %{--var headerRow =['Month'];--}%
+                    %{--data.categories.forEach(function (category) {headerRow.push(category) ;});--}%
+                    %{--console.log(headerRow);--}%
+                    %{--var obj = {};--}%
+                    %{--resultThis.forEach(function (expense) {--}%
+                        %{--if(!obj.hasOwnProperty(expense["month"])){--}%
+                            %{--obj[expense["month"]] = [expense["month"]];--}%
+                        %{--}--}%
+                        %{--obj[expense["month"]].push(expense["amount"]);--}%
 
-                    var entryThis = [];
-                    var entry = [];
+                    %{--});--}%
+                    %{--console.log(obj);--}%
+                    %{--resultDataThis.push(headerRow);--}%
 
-                    entryThis.push('Category');
-                    entryThis.push('Amount');
+                    %{--Object.keys(obj).forEach(function (key) {--}%
+                        %{--resultDataThis.push(obj[key]);--}%
+                    %{--});--}%
+                    %{--inlineData = resultDataThis;--}%
 
-                    entry.push('Category');
-                    entry.push('Amount');
+                    %{--console.log("inline", inlineData);--}%
+                    %{--drawChartThis();--}%
+                %{--}--}%
 
-                    resultDataThis.push(entryThis);
-                    resultData.push(entry);
+            %{--});--}%
+        %{--});--}%
+        %{--function drawChartThis() {--}%
+%{--if(inlineData){--}%
+    %{--if(google.visualization){--}%
+        %{--var data = google.visualization.arrayToDataTable(inlineData);--}%
 
-                    var keysThis = Object.keys(resultThis);
-                    var keys = Object.keys(result);
+        %{--var options = {--}%
+            %{--chart: {--}%
+                %{--title: 'Categorized Expenses over time',--}%
+                %{--subtitle: 'Expenses, and Categories',--}%
+            %{--}--}%
+        %{--};--}%
 
-                    keysThis.forEach(function(elementThis) {
+        %{--var chart = new google.charts.Bar(document.getElementById('chart'));--}%
 
-                        var entryThis = [];
-                        entryThis.push(elementThis);
-                        entryThis.push(resultThis[elementThis]);
-                        resultDataThis.push(entryThis);
-                        var entry = [];
-                        entry.push(elementThis);
-                        entry.push(result[elementThis]);
-                        resultData.push(entry);
-                    });
+        %{--chart.draw(data, google.charts.Bar.convertOptions(options));--}%
+    %{--}--}%
+%{--}--}%
+        %{--}--}%
 
-
-                    keys.forEach(function(element) {
-
-                        var entry = [];
-                        entry.push(element);
-                        entry.push(result[element]);
-                        resultData.push(entry);
-                    });
-                    var newData=[['Category', 'Amount', 'Amount']];
-                    1
-
-
-                    inlineData = [[resultDataThis],[resultData] ];
-                   console.log("inline",inlineData);
-                    drawChartThis();
-                }
-
-            });
-        });
-        function drawChartThis() {
-
-            if(google.visualization){
-                var dataTable = new google.visualization.DataTable();
-                dataTable.addColumn('string','Quarters');
-                dataTable.addColumn('number', 'Current Month');
-                dataTable.addColumn('number', 'Last Month');
-                // Optional; add a title and set the width and height of the chart
-                var options = {width: 1500, height: 330, title: 'Company Earnings'};
-
-                dataTable.addRows(inlineData);
-                // Display the chart inside the <div> element with id="piechart"
-                var chart = new google.visualization.ColumnChart (document.getElementById('chart'));
-
-                chart.draw(dataTable, options);
-            }
-
-        }
-
-    </script>
+    %{--</script>--}%
 </head>
 <body>
 <div class="mainContainer">
@@ -134,7 +113,7 @@
                     <li style="height: 70px; font-size: 18px"><g:link action="onLogin" controller="dashboard">Dashboard<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link> </li>
                     <li class="active" style="height: 70px; font-size: 18px"><g:link action="index" controller="account">Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index1" controller="expense">Expense<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link> </li>
-                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Reminder<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li style="height: 70px; font-size: 18px"><g:link action="index" controller="reminder">Analytics<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
                 </ul>
             </div>
@@ -234,9 +213,9 @@
 
     </g:form>
 </div>
-<div id="chart"></div>
+%{--<div id="chart" style="margin-left: 200px; width: 800px; height: 500px;"></div>--}%
 
-
+%{--style=--}%
 <!--[ footer ] -->
 <div id="accountFooter">
     <div class="container">

@@ -11,5 +11,6 @@ class Account {
     String userName
 
     static constraints = {
+        accountNumber nullable: true
     }
 }

@@ -40,9 +40,22 @@ grails.views.default.codec = "html"
 // The default scope for controllers. May be prototype, session or singleton.
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
-
+//grails.mail.jndiName = "java:comp/env/mailSession"
 // GSP settings
 grails {
+    mail {
+        host = "smtp.gmail.com"
+        port = 465
+        'default' {
+            from = "tomsmith01993@gmail.com"
+        }
+        username = "tomsmith01993@gmail.com"
+        password = "Tom@1234"
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"465",
+                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                 "mail.smtp.socketFactory.fallback":"false"]
+    }
     views {
         gsp {
             encoding = 'UTF-8'
@@ -56,8 +69,10 @@ grails {
         }
         // escapes all not-encoded output at final stage of outputting
         // filteringCodecForContentType.'text/html' = 'html'
+
     }
 }
+
 
 
 grails.converters.encoding = "UTF-8"
@@ -94,6 +109,7 @@ environments {
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
+
 
 // log4j configuration
 log4j.main = {

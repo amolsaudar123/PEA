@@ -1,5 +1,8 @@
 package pea
 
+import groovy.transform.ToString
+
+@ToString
 class UserTransaction {
     Integer amount
     Account account

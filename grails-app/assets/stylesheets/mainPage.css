@@ -1,0 +1,109 @@
+.topHeader {
+    background: url(top_header_back.png) repeat-x left top;
+    color: #777;
+    height: 20px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+    width: 100%;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+    margin-top: 0px;
+    margin-left: 0px;
+}
+
+.logoHeader {
+    margin-top: 100cm;
+    width: 950px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.logoHeader {
+    background: #FFF transparent;
+    border: 0.2px solid #DDD;
+    border-radius: 10px;
+    margin-top: -300px;
+    /*min-height: 70px;*/
+    /*min-width: 1200px;*/
+    width: 1437px;
+    height: 100px;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.logoHeader {
+    margin: 12px auto;
+    top: 10px;
+}
+
+.logo {
+    float: left;
+    margin: 27px 0;
+    margin-top: 10px;
+}
+
+.navbar1 {
+    overflow: hidden;
+    
+    height: 40px;  
+    margin-top: 5px; 
+  margin-left: 20px;
+    /*width: 100%;*/
+}
+
+.navbar1 a {
+    float: right;
+    display: block;
+    color: black ;
+    padding: 17px 20px;
+    text-decoration: none;
+    font-size: 17px;
+    margin-right: 100px;
+    margin-left: 1px;
+    padding-top: 0px;
+}
+
+.projectTitle{
+        margin-top: 40px;
+        margin-left: 450px;
+        font-size: 28px;
+        font-family:'Cherry Swash';
+        color: teal;
+        height: 20px;
+        width: 25%;
+
+  
+}
+
+#footer {
+    bottom: -150px;
+    width: 100%;
+    position: absolute;
+
+    background: url(top_header_back.png) repeat-x left top;
+    color:silver;
+    height: 30px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+
+}
+#expensefooter{
+    bottom: -600px;
+    width: 100%;
+    position: absolute;
+
+    background: url(top_header_back.png) repeat-x left top;
+    color:silver;
+    height: 30px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+
+}
+.footer-block {
+   margin-bottom: 0;
+    text-align: center;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+
+}
+

@@ -22,6 +22,7 @@ class APIController {
 
         List<UserTransaction> transactions = UserTransaction.findAllByUserAndTypeAndDateGreaterThan(session.user, "expense", calendar.getTime())
         Map groupedTransactions = transactions.groupBy { it.tag }
+
         Map<String, Integer> aggregatedExpenses = new HashMap<>()
         groupedTransactions.keySet().each { tagThis ->
             List<UserTransaction> valuesForTagThis = groupedTransactions[tagThis]

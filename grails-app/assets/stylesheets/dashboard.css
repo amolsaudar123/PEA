@@ -1,0 +1,82 @@
+
+.table-two{
+    margin-left:250px;
+    margin-top: 10px;
+}
+.table-spending{
+    margin-top: 9px;
+    margin-left: 850px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 40%;
+    border: inset thin;
+    height: 150px;
+}
+.heading1{
+    text-align: center;
+    color: black;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    background-color:#4CAF50;
+  }
+.heading2{
+    text-align: center;
+    color: black;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    background-color:lightgrey;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+    font-size: 17px;
+
+}
+
+tr:nth-child(even){
+    background-color: #f2f2f2;
+    text-align: center;
+
+}
+
+th {
+    background-color: darkslategray;
+    color: white;
+
+}
+
+
+
+.accountDetail{
+    font-size: 20px;
+    margin-left:250px;
+    margin-top: 120px;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: black;
+}
+.analyzer{
+    font-size: 20px;
+    margin-left:950px;
+    margin-top: -240px;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: black;
+}
+.newAccount{
+    margin-top: 50px;
+    margin-left: 520px;
+    color: #16181b;
+}
+.navbar4{
+    margin-top: 100px;
+   bottom: -50px;
+
+}
+.dashboardFooter{
+    margin-bottom: -10%;
+}
+#verticalMenu{
+    height: 640px;
+}
+
+

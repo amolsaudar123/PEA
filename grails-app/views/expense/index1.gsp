@@ -62,8 +62,8 @@
     <!--LeftSide Menu End-->
 
     <div class="expense">Previous Expenses</div>
-    <div class="analyzeExpense"><button  type="button" id="" class="btn-md btn-info "> Analyze Expenses</button></div>
-    <table class="table-five" border="2">
+<div class="analyzeExpense"><g:link action="index" controller="reminder"><button  type="button" id="" class="btn-md btn-info"  > Analyze Expenses</g:link></button></div>
+    <table class="table-five" border="2" >
         <thead>
         <tr>
             <th class="heading1">Payee</th>
@@ -82,13 +82,14 @@
                 <td>${expense.payee}</td>
                 <td>${expense.amount}</td>
                 <td>${expense.account.bankName}</td>
-                <td><g:formatDate date="${expense.date}" format="dd/MM/yyyy"/> </td>
+                <td><g:formatDate date="${expense.date}" format="dd-MMM-yyyy"/> </td>
                 <td>${expense.tag}</td>
                 <td><g:link action="delete"  controller="expense" id="${expense.id}">Delete</g:link></td>
                 <td><g:link action="edit"  controller="expense" id="${expense.id}">Edit</g:link></td>
             </tr>
         </g:each>
         </tbody>
+        <g:paginate controller="expense" action="index1" total="${expenses}" />
     </table>
 
     <div class="income">Income</div>
@@ -112,7 +113,7 @@
                 <td>${income.payer}</td>
                 <td>${income.amount}</td>
                 <td>${income.account.bankName}</td>
-                <td><g:formatDate date="${income.date}" format="dd/MM/yyyy"/>  </td>
+                <td><g:formatDate date="${income.date}" format="dd-MMM-yyyy"/>  </td>
                 <td>${income.tag}</td>
                 <td><g:link action="delete"  controller="expense" id="${income.id}">Delete</g:link></td>
                 <td><g:link action="editTransaction"  controller="expense" id="${income.id}">Edit</g:link></td>
@@ -120,6 +121,7 @@
         </g:each>
         </tbody>
     </table>
+
     <script>
         $(document).ready(function() {
 

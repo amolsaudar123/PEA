@@ -25,14 +25,14 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script type="text/javascript">
-        var inlineData=[];
+        var inlineDataForBarchart=[];
         $(document).ready(function() {
 
             google.charts.load('current', {
                 'packages': ['bar']
             });
 
-            google.charts.setOnLoadCallback(drawChartThis);
+            google.charts.setOnLoadCallback(drawBarChart);
 
             $.ajax({
                 type: 'GET',
@@ -59,29 +59,29 @@
                     Object.keys(obj).forEach(function (key) {
                         resultDataThis.push(obj[key]);
                     });
-                    inlineData = resultDataThis;
+                    inlineDataForBarchart = resultDataThis;
 
-                    console.log("inline", inlineData);
-                    drawChartThis();
+                    console.log("inline", inlineDataForBarchart);
+                    drawBarChart();
                 }
 
             });
         });
-        function drawChartThis() {
-            if(inlineData){
+        function drawBarChart() {
+            if(inlineDataForBarchart){
                 if(google.visualization){
-                    var data = google.visualization.arrayToDataTable(inlineData);
+                    var data = google.visualization.arrayToDataTable(inlineDataForBarchart);
 
                     var options = {
                         chart: {
                             title: 'Categorized Expenses over time',
-                            subtitle: 'Expenses, and Categories',
+                            subtitle: 'Expenses, and Categories',   
                         }
                     };
 
-                    var chart = new google.charts.Bar(document.getElementById('BarChart'));
+                    var charts = new google.charts.Bar(document.getElementById('BarChart'));
 
-                    chart.draw(data, google.charts.Bar.convertOptions(options));
+                    charts.draw(data, google.charts.Bar.convertOptions(options));
                 }
             }
         }
@@ -117,7 +117,7 @@
                     <li style="height: 70px; font-size: 18px"><g:link action="onLogin" controller="dashboard"> Dashboard<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index" controller="account">Account<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
                     <li style="height: 70px; font-size: 18px"><g:link action="index1" controller="expense"> Expense<span style="font-size:19px; " class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link></li>
-                    <li  class="active" style="height: 70px; font-size: 18px; "><g:link controller="reminder" action="index">Analytix<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+                    <li  class="active" style="height: 70px; font-size: 18px; "><g:link controller="reminder" action="index">Analytics<span style="font-size:19px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
                     <li  style="height: 70px; font-size: 18px; "><g:link controller="dashboard" action="profile">Profile<span style="font-size:19px; " class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></g:link></li>
 
                 </ul>
@@ -181,9 +181,9 @@
 
         }
     </script>
-    %{--Current Month Expenses Calculation Closed--}%
 
-    %{--Last Month Expenses Calculation --}%
+
+
 
     <script type="text/javascript">
         var inlineData=[['Category', 'Amount']];
@@ -240,20 +240,22 @@
         }
     </script>
 
-%{--Bar Chart--}%
 
 
 
-     <div class="reminderDetail">${new Date()}</div>
+
+     <div class="reminderDetail">Analytics</div>
     <div class="pdf">
+        <div id="BarChart" style="margin-left: 300px; width: 800px; height: 300px;"></div>
     <div id="piechart"></div>
 
     <div id="piechartForLastMonth"></div>
-        <div id="BarChart" style="margin-left: 200px; width: 800px; height: 500px;"></div>
 
-    </div>
 
-    <button id="cmd">Generate PDF</button>
+
+</div>
+    <button id="cmd" style="margin-top:-100px; margin-left: 500px">Generate PDF Report</button>
+    <g:link value="sendMail"  action="sendMail" name="sendMail" style="margin-left: 50px">Share Report On Mail</g:link>
 <script>
     var doc = new jsPDF();
     var specialElementHandlers = {
@@ -267,7 +269,7 @@
     'width': 170,
     'elementHandlers': specialElementHandlers
     });
-    doc.save('sample-file.pdf');
+    doc.save('report.pdf');
     });
 </script>
 

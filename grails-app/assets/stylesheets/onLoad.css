@@ -1,0 +1,69 @@
+#mask {
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:9000;
+    /*background-color:#000;*/
+    display:none;
+}
+#boxes .window {
+    position:absolute;
+    left:0;
+    top:0;
+    width:320px;
+    height:400px;
+    display:none;
+    z-index:9999;
+    padding:20px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: -10px;
+    margin-left: 300px;
+}
+#boxes #dialog {
+    width:320px;
+    height:auto;
+    padding:10px;
+    background-color: lavender;
+
+    font-family: 'Segoe UI Light', sans-serif;
+    font-size: 15pt;
+
+}
+.maintext{
+    text-align: center;
+    font-family: "Segoe UI", sans-serif;
+    text-decoration: none;
+}
+
+#lorem{
+    font-family: "Segoe UI", sans-serif;
+    font-size: 12pt;
+    text-align: left;
+}
+#popupfoot{
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16pt;
+    /*padding: 10px 20px;*/
+    margin-left: 10px;
+}
+#popupfoot a{
+    text-decoration: none;
+}
+.agree{
+    margin-left: -50px;
+}
+.agree:hover{
+    background-color: #D1D1D1;
+}
+.popupoption:hover{
+    background-color:#D1D1D1;
+    color: green;
+}
+.popupoption2:hover{
+
+    color: red;
+}
+.closeagree{
+    margin-left: 50px;
+}

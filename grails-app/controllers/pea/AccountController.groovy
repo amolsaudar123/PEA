@@ -3,7 +3,7 @@ package pea
 class AccountController {
 
     def index() {
-        def account=Account.findAllByUserNameLike(session.user).collect{it}
+        def account=Account.findAllByUserNameLike(session.user, [sort:'id', order:'desc'])
         [account:account]
     }
     def save() {

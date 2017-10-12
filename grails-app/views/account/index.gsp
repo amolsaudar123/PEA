@@ -21,70 +21,7 @@
     <link href='https://fonts.googleapis.com/css?family=Cherry Swash' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    %{--<script type="text/javascript">--}%
-        %{--var inlineData=[];--}%
-        %{--$(document).ready(function() {--}%
-           %{----}%
-            %{--google.charts.load('current', {--}%
-                %{--'packages': ['bar']--}%
-            %{--});--}%
 
-            %{--google.charts.setOnLoadCallback(drawChartThis);--}%
-
-            %{--$.ajax({--}%
-                %{--type: 'GET',--}%
-                %{--url: '/PEA/api/catexpenses',--}%
-                %{--dataType: "json",--}%
-                %{--success: function (data) {--}%
-                    %{--var resultDataThis = [];--}%
-                    %{--var resultThis = data.comparativeData;--}%
-                    %{--console.log(resultThis);--}%
-                    %{--var headerRow =['Month'];--}%
-                    %{--data.categories.forEach(function (category) {headerRow.push(category) ;});--}%
-                    %{--console.log(headerRow);--}%
-                    %{--var obj = {};--}%
-                    %{--resultThis.forEach(function (expense) {--}%
-                        %{--if(!obj.hasOwnProperty(expense["month"])){--}%
-                            %{--obj[expense["month"]] = [expense["month"]];--}%
-                        %{--}--}%
-                        %{--obj[expense["month"]].push(expense["amount"]);--}%
-
-                    %{--});--}%
-                    %{--console.log(obj);--}%
-                    %{--resultDataThis.push(headerRow);--}%
-
-                    %{--Object.keys(obj).forEach(function (key) {--}%
-                        %{--resultDataThis.push(obj[key]);--}%
-                    %{--});--}%
-                    %{--inlineData = resultDataThis;--}%
-
-                    %{--console.log("inline", inlineData);--}%
-                    %{--drawChartThis();--}%
-                %{--}--}%
-
-            %{--});--}%
-        %{--});--}%
-        %{--function drawChartThis() {--}%
-%{--if(inlineData){--}%
-    %{--if(google.visualization){--}%
-        %{--var data = google.visualization.arrayToDataTable(inlineData);--}%
-
-        %{--var options = {--}%
-            %{--chart: {--}%
-                %{--title: 'Categorized Expenses over time',--}%
-                %{--subtitle: 'Expenses, and Categories',--}%
-            %{--}--}%
-        %{--};--}%
-
-        %{--var chart = new google.charts.Bar(document.getElementById('chart'));--}%
-
-        %{--chart.draw(data, google.charts.Bar.convertOptions(options));--}%
-    %{--}--}%
-%{--}--}%
-        %{--}--}%
-
-    %{--</script>--}%
 </head>
 <body>
 <div class="mainContainer">
@@ -213,9 +150,9 @@
 
     </g:form>
 </div>
-%{--<div id="chart" style="margin-left: 200px; width: 800px; height: 500px;"></div>--}%
 
-%{--style=--}%
+
+
 <!--[ footer ] -->
 <div id="accountFooter">
     <div class="container">

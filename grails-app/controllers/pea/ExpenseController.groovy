@@ -6,14 +6,14 @@ class ExpenseController {
 
 
     def index1(){
-        //def expense=Expense.list()
+
         List<String> bankNames = expenseService.getBankName(session.user)
         def newList=expenseService.getByUserName(session.user)
 
-        def expenses = UserTransaction.findAllByUserAndType(session.user,"expense")
-        def incomes = UserTransaction.findAllByUserAndType(session.user,"income")
+        def expenses = UserTransaction.findAllByUserAndType(session.user,"expense", [sort:'date', order:'desc'])
+        def incomes = UserTransaction.findAllByUserAndType(session.user,"income", [sort:'date', order:'desc'])
 
-        render(view: 'index1', model: [bankNames:bankNames,expenses: expenses,incomes:incomes, newList:newList])
+        render(view: 'index1', model: [bankNames:bankNames,expenses: expenses,incomes:incomes, expenseCount:expenses.size(), newList:newList])
     }
 
     def save(){

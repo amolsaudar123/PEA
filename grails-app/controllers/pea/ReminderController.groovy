@@ -1,27 +1,31 @@
 package pea
 
-//import grails.plugin.mail.MailService
+import grails.plugin.mail.MailService
+import org.springframework.beans.factory.annotation.Autowired
+
+
 
 class ReminderController {
-//    MailService mailService
+
+    @Autowired
+    MailService mailService
+
     def index() {
         def reminder=Reminder.findAllByUserName(session.user).collect{it}
         [reminder: reminder]
     }
 
-    def save(){
-        def addReminder=new Reminder(params)
-        addReminder.save()
-        redirect action: "index", controller: "reminder"
+
+    def sendMail() {
+        def expenses = UserTransaction.findAllByUserAndType(session.user,"expense", [sort:'date', order:'desc'])
+
+        mailService.sendMail {
+            to "amolsaudar@gmail.com"
+            subject "Report"
+            html g.render(template:"sendMail", model:[expenses: expenses], view: "sendMail")
+        }
+        flash.message = "Message sent at "+new Date()
+        redirect action:"index"
     }
-
-    def delete (Long id){
-
-        def deleteReminder = Reminder.get(params.id)
-
-        deleteReminder.delete flush: true, failOnError: true
-        redirect action: "index", controller: "reminder"
-    }
-
 
 }

@@ -15,9 +15,11 @@ class UrlMappings {
 
         "/api/index"(controller: "account", action: "index")
         "/api/index1"(controller: "expense", action: "index1")
+        "/api/_sendMail"(controller: "reminder", action: "sendMail")
         "/api/expenses"(controller: "API", action: "getAggregatedExpenses" )
         "/api/catexpenses"(controller: "API", action: "getCategorizedExpensesForPastMonths" )
 //        "/api/expenses"(controller: "API", action: "getLastAggregatedExpenses")
+        "/api/sendMail"(controller: "reminder", action: "sendMail")
 
 
     }

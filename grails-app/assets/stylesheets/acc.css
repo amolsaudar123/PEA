@@ -1,0 +1,89 @@
+table {
+    border-collapse: collapse;
+    width: 80%;
+    height: 50%;
+}
+
+th, td {
+    text-align: center;
+    padding: 8px;
+    font-size: 17px;
+
+}
+.expenseTable{
+    color: #491217;
+}
+
+
+
+tr:nth-child(even){background-color: #f2f2f2;
+    text-align: center;
+
+}
+.heading1{
+    text-align: center;
+}
+th {
+    text-align: center;
+    background-color: darkslategray;
+    color: white;
+}
+
+.table-two{
+    margin-left:300px;
+
+    margin-top: 10px;
+}
+.table-four{
+    margin-left:250px;
+    width: 70%;
+    margin-top: 10px;
+
+}
+.analyzeExpense{
+    margin-left: 950px;
+    margin-top: -30px;
+}
+.accountDetail{
+    font-size: 25px;
+    margin-left:800px;
+    margin-top: 130px;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: black;
+
+}
+
+.expense{
+    font-size: 25px;
+    margin-left:700px;
+    margin-top: 130px;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: black;
+}
+.income{
+    font-size: 25px;
+    margin-left:750px;
+    margin-top: 50px;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: black;
+}
+#expenseFluid{
+    height: 950px;
+}
+.newAccount{
+    margin-top: 50px;
+    margin-left: 520px;
+    color: #16181b;
+}
+.table-five{
+    margin-left: 250px;
+    margin-top: 10px;
+}
+.table-transaction{
+    margin-left: 250px;
+    margin-top: 10px;
+}
+
+.radio_button{
+    font-size: 18px;
+}

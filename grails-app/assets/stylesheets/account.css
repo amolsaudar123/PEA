@@ -1,0 +1,44 @@
+
+*[role="form"] {
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+
+    border-radius: 0.2em;
+    margin-top: 100px;
+    
+   margin-bottom: 0px;
+}
+
+*[role="form"] h4{
+    margin-left: 11em;
+   
+}
+
+.form-horizontal {
+    width: 1000px;
+    height: 450px;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: lightgray ;
+    box-shadow: 1px 1px black;
+
+}
+#expenseForm{
+    height: 700px;
+}
+#accountFooter{
+    bottom: -200px;
+    width: 100%;
+    position: absolute;
+
+    background: url(top_header_back.png) repeat-x left top;
+    color:silver;
+    height: 30px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+}
+
+
+
+

@@ -12,7 +12,7 @@
     <title>PEA:Reminder</title>
     <asset:stylesheet src="reminder.css"/>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>s
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'mainPage.css')}" type="text/css">
 
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'verticalMenu.css')}" type="text/css">
@@ -41,7 +41,7 @@
                 success: function (data) {
                     var resultDataThis = [];
                     var resultThis = data.comparativeData;
-                    console.log(resultThis);
+                    console.log("resultThis//",resultThis);
                     var headerRow =['Month'];
                     data.categories.forEach(function (category) {headerRow.push(category) ;});
                     console.log(headerRow);
@@ -61,7 +61,7 @@
                     });
                     inlineDataForBarchart = resultDataThis;
 
-                    console.log("inline", inlineDataForBarchart);
+                    console.log("inlineDataForBarchart", inlineDataForBarchart);
                     drawBarChart();
                 }
 
@@ -80,8 +80,10 @@
                     };
 
                     var charts = new google.charts.Bar(document.getElementById('BarChart'));
-
+                    var chartDive= document.getElementById('BarChart');
                     charts.draw(data, google.charts.Bar.convertOptions(options));
+                    chartDive.innerHTML = '<img src="' + chart.getImageURI() + '">';
+                    console.log("BarChart", innerHTML)
                 }
             }
         }

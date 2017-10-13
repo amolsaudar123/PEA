@@ -17,6 +17,7 @@ class APIController {
         response.setContentType('application/json')
 
         Calendar calendar = Calendar.getInstance()
+
         calendar.set(Calendar.DATE, 1)
         calendar.add(Calendar.DATE, -1)
 
@@ -69,7 +70,9 @@ class APIController {
 
     def getCategorizedExpensesForPastMonths(){
         Calendar lowerDate = Calendar.getInstance()
+        lowerDate.set(Calendar.DATE, -1)
         lowerDate.add(Calendar.MONTH,-1)
+        lowerDate.set(Calendar.MONTH,1)
         //def comparativeData=getExpensesFor(lowerDate.getTime().clearTime(),new Date())
 
         List<UserTransaction> transactions = UserTransaction.findAllByUserAndTypeAndDateBetween(session.user, "expense", lowerDate.getTime().clearTime(), new Date(),[sort:"date",order:"asc"])
@@ -113,7 +116,9 @@ class APIController {
                 aggregatedExpenses.get(tagThis).add(expense)
             }
         }
+
         aggregatedExpenses
+
     }
 
 

@@ -82,8 +82,8 @@
                     var charts = new google.charts.Bar(document.getElementById('BarChart'));
                     var chartDive= document.getElementById('BarChart');
                     charts.draw(data, google.charts.Bar.convertOptions(options));
-                    chartDive.innerHTML = '<img src="' + chart.getImageURI() + '">';
-                    console.log("BarChart", innerHTML)
+
+
                 }
             }
         }

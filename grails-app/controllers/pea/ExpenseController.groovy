@@ -1,19 +1,26 @@
 package pea
 
+
+
 class ExpenseController {
 
-    def expenseService
+ExpenseService expenseService
 
 
     def index1(){
 
         List<String> bankNames = expenseService.getBankName(session.user)
-        def newList=expenseService.getByUserName(session.user)
+
+        params.max = Math.min(params.int('max', 5), 10)
+        params.offset = params.int('offset', 0)
+
 
         def expenses = UserTransaction.findAllByUserAndType(session.user,"expense", [sort:'date', order:'desc'])
+        def total=expenses.size()
+        def expense2=UserTransaction.executeQuery("from UserTransaction where user=? and type=?", [session.user,"expense"], [offset:params.offset, max:params.max])
         def incomes = UserTransaction.findAllByUserAndType(session.user,"income", [sort:'date', order:'desc'])
 
-        render(view: 'index1', model: [bankNames:bankNames,expenses: expenses,incomes:incomes, expenseCount:expenses.size(), newList:newList])
+        render(view: 'index1', model: [bankNames:bankNames,expenses: expenses,incomes:incomes, expenseCount:total, expense2:expense2])
     }
 
     def save(){

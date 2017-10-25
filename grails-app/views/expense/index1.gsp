@@ -11,6 +11,7 @@
 <head>
    <title>PEA:Expense</title>
     <asset:stylesheet src="acc.css"/>
+    <asset:stylesheet src="pagination.css"/>
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'mainPage.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'account.css')}" type="text/css">
     <link rel="stylesheet" href="${resource(dir: 'stylesheets', file: 'verticalMenu.css')}" type="text/css">
@@ -31,7 +32,7 @@
             <div class="projectTitle">Personal Expense Analyzer</div>
             <div class="navbar1">
 
-                <a href="#profile">Welcome ${session.user}  |</a>
+                <a href="#">Welcome ${session.user}  |</a>
 
             </div>
         </div>
@@ -62,7 +63,8 @@
     <!--LeftSide Menu End-->
 
     <div class="expense">Previous Expenses</div>
-<div class="analyzeExpense"><g:link action="index" controller="reminder"><button  type="button" id="" class="btn-md btn-info"  > Analyze Expenses</g:link></button></div>
+    <div class="analyzeExpense"><g:link action="index" controller="reminder"><button  type="button" id="" class="btn-md btn-info"  > Analyze Expenses</g:link></button></div>
+
     <table class="table-five" border="2" >
         <thead>
         <tr>
@@ -73,11 +75,12 @@
             <th class="heading1">Tag</th>
             <th class="heading1">Delete Expense</th>
             <th class="heading1">Edit Expense</th>
+
         </tr>
         </thead>
         <tbody>
 
-        <g:each in="${expenses}" status="i" var="expense">
+        <g:each in="${expense2}" status="i" var="expense">
             <tr class="expenseTable">
                 <td>${expense.payee}</td>
                 <td>${expense.amount}</td>
@@ -85,13 +88,16 @@
                 <td><g:formatDate date="${expense.date}" format="dd-MMM-yyyy"/> </td>
                 <td>${expense.tag}</td>
                 <td><g:link action="delete"  controller="expense" id="${expense.id}">Delete</g:link></td>
+                %{--<span class=" hidden-xs showopacity glyphicon glyphicon-trash"></span>--}%
                 <td><g:link action="edit"  controller="expense" id="${expense.id}">Edit</g:link></td>
             </tr>
         </g:each>
-        </tbody>
-        <g:paginate controller="expense" action="index1" total="${expenses}" />
-    </table>
 
+        </tbody>
+        </table>
+<div class="paginateButtons">
+    <g:paginate controller="expense" action="index1" next="Next" prev="Previous" total="${expenseCount}"/>
+</div>
     <div class="income">Income</div>
 
     <table class="table-transaction" border="2">
@@ -219,12 +225,13 @@
 
     </g:form>
 
+
 <!--[ footer ] -->
     <div id="expensefooter">
         <div class="container">
             <p class="footer-block"> &copy; 2017 Personal Expense Analyzer
 
-            &nbsp;&nbsp;&nbsp;&nbsp;
+
 
             Design by Amol <a HREF="www.sptr.co"> (SyS +)</a></p>
         </div>

@@ -15,6 +15,7 @@
 <h3>Greetings ${session.user}!</h3>
 <p>Welcome to Personal Expense Analyzer</p>
 <p>Find Expense Report Below.</p>
+
 <table class="table-five" border="1" >
     <thead>
     <tr>
@@ -26,19 +27,19 @@
 
     </tr>
     </thead>
-<tbody>
+    <tbody>
 
-<g:each in="${expenses}" status="i" var="expense">
-    <tr class="expenseTable">
-        <td>${expense.payee}</td>
-        <td>${expense.amount}</td>
-        <td>${expense.account.bankName}</td>
-        <td><g:formatDate date="${expense.date}" format="dd-MMM-yyyy" /> </td>
-        <td>${expense.tag}</td>
+    <g:each in="${expensesShare}" status="i" var="expense">
+        <tr class="expenseTable">
+            <td>${expense.payee}</td>
+            <td>${expense.amount}</td>
+            <td>${expense.account.bankName}</td>
+            <td><g:formatDate date="${expense.date}" format="dd-MMM-yyyy" /> </td>
+            <td>${expense.tag}</td>
 
-    </tr>
-</g:each>
-</tbody>
+        </tr>
+    </g:each>
+    </tbody>
 </table>
 </body>
 </html>

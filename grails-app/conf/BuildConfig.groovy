@@ -55,7 +55,7 @@ grails.project.dependency.resolution = {
 
     }
 
-    plugins {
+        plugins {
         // plugins for the build system only
         build ":tomcat:7.0.55"
 
@@ -66,6 +66,8 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:1.9.9"
         compile ":mail:1.0.7"
         compile ':remote-pagination:0.4.5'
+        compile ":jasper:1.11.0"
+//        compile "org.grails.plugins:rendering:1.0.0"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"

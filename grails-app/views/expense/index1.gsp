@@ -64,7 +64,7 @@
 
     <div class="expense">Previous Expenses</div>
     <div class="analyzeExpense"><g:link action="index" controller="reminder"><button  type="button" id="" class="btn-md btn-info"  > Analyze Expenses</g:link></button></div>
-
+    <div class="expenseInfoTable">
     <table class="table-five" border="2" >
         <thead>
         <tr>
@@ -75,6 +75,16 @@
             <th class="heading1">Tag</th>
             <th class="heading1">Delete Expense</th>
             <th class="heading1">Edit Expense</th>
+
+            %{--<g:sortableColumn property="payee" title="Payee" />--}%
+            %{--<g:sortableColumn property="Amount" title="Amount" />--}%
+            %{--<g:sortableColumn property="Account Paid From" title="Account Paid From" />--}%
+            %{--<g:sortableColumn property="Date" title="Date" />--}%
+            %{--<g:sortableColumn property="Tag" title="Tag" />--}%
+            %{--<g:sortableColumn property="Delete Expense" title="Delete Expense" />--}%
+            %{--<g:sortableColumn property="Edit Expense" title="Edit Expense" />--}%
+
+
 
         </tr>
         </thead>
@@ -95,9 +105,13 @@
 
         </tbody>
         </table>
+    </div>
 <div class="paginateButtons">
     <g:paginate controller="expense" action="index1" next="Next" prev="Previous" total="${expenseCount}"/>
 </div>
+   <g:link value="sendMail" controller="expense" action="sendMail" name="sendMail" style="margin-left: 50px">Share Report On Mail</g:link>
+
+
     <div class="income">Income</div>
 
     <table class="table-transaction" border="2">
@@ -224,7 +238,6 @@
 
 
     </g:form>
-
 
 <!--[ footer ] -->
     <div id="expensefooter">

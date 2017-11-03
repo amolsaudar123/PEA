@@ -42,6 +42,7 @@ class DashboardService {
         List<AccountSummary> accountSummaries = new ArrayList<>()
 
         Account.findAllByUserName(name).each {account ->
+            UserTransaction.findAllByUser(name)
             Integer totalSpend = UserTransaction.findAllByAccountAndType(account,"expense").sum { expense -> expense.amount }
             Integer totalEarn = UserTransaction.findAllByAccountAndType(account,"income").sum { income -> income.amount }
 

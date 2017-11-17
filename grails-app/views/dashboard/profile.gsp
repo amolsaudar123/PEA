@@ -74,7 +74,7 @@
         <li style="height: 50px; font-size: 15px"><g:link action="onLogin" controller="dashboard"> Dashboard<span style="font-size:15px; margin-left: 10px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home "></span></g:link></li>
         <li style="height: 50px; font-size: 15px"><g:link action="index" controller="account">Account<span style="font-size:15px; margin-left: 10px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></g:link></li>
         <li style="height: 50px; font-size: 15px"><g:link action="index1" controller="expense"> Expense<span style="font-size:15px; margin-left: 10px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paperclip"></span></g:link></li>
-        <li   style="height: 50px; font-size: 15px; "><g:link controller="reminder" action="index">Reminder<span style="font-size:15px; margin-left: 10px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
+        <li   style="height: 50px; font-size: 15px; "><g:link controller="reminder" action="index">Analytics<span style="font-size:15px; margin-left: 10px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-dashboard"></span></g:link></li>
 
     </ul>
 </div>

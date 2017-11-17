@@ -258,27 +258,27 @@
         }
     </script>
 
-    <button id="cmd" style="margin-top:-100px; margin-left: 500px">Generate PDF Report</button>
+    %{--<button id="cmd" style="margin-top:-100px; margin-left: 500px">Generate PDF Report</button>--}%
 
-    <script>
-        $('#cmd').click(genScreenshot);
+    %{--<script>--}%
+        %{--$('#cmd').click(genScreenshot);--}%
 
-        function genScreenshot() {
-            html2canvas(document.getElementById('png'), {
-                onrendered: function(canvas) {
-                    $('#png').html("");
-                    $('#png').append(canvas);
+        %{--function genScreenshot() {--}%
+            %{--html2canvas(document.getElementById('png'), {--}%
+                %{--onrendered: function(canvas) {--}%
+                    %{--$('#png').html("");--}%
+                    %{--$('#png').append(canvas);--}%
 
-                    var imgData = canvas.toDataURL("image/jpeg", 1.0);
-                    var pdf = new jsPDF();
+                    %{--var imgData = canvas.toDataURL("image/jpeg", 1.0);--}%
+                    %{--var pdf = new jsPDF();--}%
 
-                    pdf.addImage(imgData, 'JPEG', 0, 0);
+                    %{--pdf.addImage(imgData, 'JPEG', 0, 0);--}%
 
-                    pdf.save('screenshot.pdf');
-                }
-            });
-        }
-    </script>
+                    %{--pdf.save('screenshot.pdf');--}%
+                %{--}--}%
+            %{--});--}%
+        %{--}--}%
+    %{--</script>--}%
 
      <div class="reminderDetail">Analytics</div>
 
@@ -290,11 +290,11 @@
 
 
 
-      <div id='png' style="background: #fff"></div>
-        <div id='png2' style="background: #fff; margin-top: -500px; margin-left: 500px"></div>
-        <div id='png3' style="background: #fff; margin-top: 500px"></div>
+      %{--<div id='png' style="background: #fff"></div>--}%
+        %{--<div id='png2' style="background: #fff; margin-top: -500px; margin-left: 500px"></div>--}%
+        %{--<div id='png3' style="background: #fff; margin-top: 500px"></div>--}%
     </div>
-    <g:link value="sendMail"  action="sendMail" name="sendMail" style="margin-left: 50px">Share Report On Mail</g:link>
+    %{--<g:link value="sendMail"  action="sendMail" name="sendMail" style="margin-left: 50px">Share Report On Mail</g:link>--}%
 
     %{--Footer--}%
     <div id="reminderFooter">

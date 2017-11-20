@@ -131,7 +131,7 @@
     </g:form>
 
 <!--[ footer ] -->
-    <div id="tranfooter">
+    <div id="expenseEditfooter">
         <div class="container">
             <p class="footer-block"> &copy; 2017 Personal Expense Analyzer
 

@@ -87,3 +87,37 @@ th {
 .radio_button{
     font-size: 18px;
 }
+
+
+
+#expenseEditfooter {
+    bottom: -150px;
+    width: 100%;
+    position: absolute;
+
+    background: url(top_header_back.png) repeat-x left top;
+    color:silver;
+    height: 30px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+
+}
+#expenseEditfooter{
+    bottom: -600px;
+    width: 100%;
+    position: absolute;
+
+    background: url(top_header_back.png) repeat-x left top;
+    color:silver;
+    height: 30px;
+    min-width: 950px;
+    padding: 7px 0 13px;
+
+}
+.footer-block {
+    margin-bottom: 0;
+    text-align: center;
+    font-family: "Trebuchet MS", Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 16px;
+
+}

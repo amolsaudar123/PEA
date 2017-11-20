@@ -88,10 +88,11 @@
 
 }
 #expensefooter{
-    bottom: -600px;
+
+
     width: 100%;
     position: absolute;
-
+    margin-top: 350px;
     background: url(top_header_back.png) repeat-x left top;
     color:silver;
     height: 30px;

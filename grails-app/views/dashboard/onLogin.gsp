@@ -64,26 +64,8 @@
     </nav>
     <!--LeftSide Menu End-->
     <div class="accountDetail">Hi, ${session.user} Check Your Spending  </div>
-    <script>
-        var $table = $('table.table-two'),
-            $bodyCells = $table.find('tbody tr:first').children(),
-            colWidth;
 
-        // Adjust the width of thead cells when window resizes
-        $(window).resize(function() {
-            // Get the tbody columns width array
-            colWidth = $bodyCells.map(function() {
-                return $(this).width();
-            }).get();
-
-            // Set the width of thead columns
-            $table.find('thead tr').children().each(function(i, v) {
-                $(v).width(colWidth[i]);
-            });
-        }).resize(); // Trigger resize handler
-
-    </script>
-    <table class="table-two" border="1" id="dashboardTable1">
+    <table class="table-two" id="dashboardTable1">
         <thead>
 
         <tr>

@@ -109,8 +109,9 @@
 <div class="paginateButtons">
     <g:paginate controller="expense" action="index1" next="Next" prev="Previous" total="${expenseCount}"/>
 </div>
-   <g:link value="sendMail" controller="expense" action="sendMail" name="sendMail" style="margin-left: 50px">Share Report On Mail</g:link>
-
+    <div class="share" style="margin-top: -30px">
+   <g:link value="sendMail" controller="expense" action="sendMail" name="sendMail" style="margin-left: 400px; color: green; font-size: 15px; " title="Share">Share Report On Mail </g:link>
+    </div>
 
     <div class="income">Income</div>
 
@@ -199,7 +200,7 @@
             <g:textField name="amount" value="${amount}"  id="amount" placeholder="amount" class="form-control"/>
             <span class="help-block">amount</span>
         </div>
-        <label class="col-sm-3 control-label">AccountPaidFrom</label>
+        <label class="col-sm-3 control-label">Account</label>
         <div class="col-sm-9">
             <g:select id="bankName" class="form-control" value="${account}" name="bankName" from="${bankNames}">
             </g:select>
@@ -240,7 +241,7 @@
     </g:form>
 
 <!--[ footer ] -->
-    <div id="expensefooter">
+    <div id="expensefooter" style="margin-bottom: 0px">
         <div class="container">
             <p class="footer-block"> &copy; 2017 Personal Expense Analyzer
 
